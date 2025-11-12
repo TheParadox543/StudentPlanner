@@ -3,4 +3,4 @@ root = true
 [*.{kt,kts}]
 # Disable the ktlint rule that enforces function naming conventions
 ktlint_standard_function-naming = disabled
-
+ktlint_standard_final-newline = disabled
