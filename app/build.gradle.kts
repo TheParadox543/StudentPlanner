@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
 
     // For hilt
     implementation("com.google.dagger:hilt-android:2.57.1")
@@ -68,6 +69,9 @@ dependencies {
     implementation("androidx.compose.material3.adaptive:adaptive:1.3.0-alpha03")
     implementation("androidx.compose.material3.adaptive:adaptive-layout:1.3.0-alpha03")
     implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.3.0-alpha03")
+    implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.3.0")
+    implementation(libs.androidx.compose.material3.window.size.class1)
+    implementation("androidx.compose.material3:material3-window-size-class-android:1.4.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
