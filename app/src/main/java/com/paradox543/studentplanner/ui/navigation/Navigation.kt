@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Task
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -12,57 +13,58 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.studentplanner.ui.view.HomeScreen
 import com.paradox543.studentplanner.ui.view.PanelA
 import com.paradox543.studentplanner.ui.view.PanelB
+import com.paradox543.studentplanner.ui.view.SettingsScreen
 import com.paradox543.studentplanner.ui.view.TaskScreen
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    var currentDestination by rememberSaveable { mutableStateOf("") }
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
     Log.d("NavigationWindowSizeClass", "WindowSizeClass $windowSizeClass")
-    val route = navController.currentBackStackEntry?.destination?.route
-    LaunchedEffect(route) {
-        currentDestination = route ?: "Error"
-    }
-    Log.d("NavigationCurrentDestination", "CurrentDestination $currentDestination")
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val route = navBackStackEntry?.destination?.route
+    Log.d("NavigationCurrentDestination", "CurrentDestination $route")
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
             item(
                 icon = { Icon(Icons.Default.Home, contentDescription = null) },
                 label = { Text("Home") },
-                selected = currentDestination == "home",
+                selected = route == "home",
                 onClick = { navController.navigate("home") },
             )
             item(
                 icon = { Icon(Icons.Default.Accessibility, contentDescription = null) },
                 label = { Text("Profile") },
-                selected = currentDestination == "panelA",
+                selected = route == "panelA",
                 onClick = { navController.navigate("panelA") },
             )
             item(
                 icon = { Icon(Icons.Default.Person, contentDescription = null) },
                 label = { Text("Profile") },
-                selected = currentDestination == "profile",
+                selected = route == "panelB",
                 onClick = { navController.navigate("panelB") },
             )
             item(
                 icon = { Icon(Icons.Default.Task, "Tasks") },
                 label = { Text("Tasks") },
-                selected = currentDestination == "tasks",
+                selected = route == "taskScreen",
                 onClick = { navController.navigate("taskScreen") },
+            )
+            item(
+                icon = { Icon(Icons.Default.Settings, "settings") },
+                label = { Text("Settings") },
+                selected = route == "settings",
+                onClick = { navController.navigate("settings") },
             )
         },
     ) {
@@ -78,6 +80,9 @@ fun Navigation() {
             }
             composable("panelB") {
                 PanelB()
+            }
+            composable("settings") {
+                SettingsScreen()
             }
         }
     }
