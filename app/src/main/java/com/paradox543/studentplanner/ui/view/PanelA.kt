@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
-@Composable
-fun PanelA(navController: NavController) {
-    Scaffold { innerPadding ->
-        Column(Modifier.padding(innerPadding)) {
-            Text("Hello World")
-            Button(onClick = { navController.navigate("panelB") }) {
-                Text("Go to Screen B")
-            }
-        }
-    }
-}
+// @Composable
+// fun PanelA() {
+//    Scaffold { innerPadding ->
+//        Column(Modifier.padding(innerPadding)) {
+//            Text("Hello World")
+//            Button(onClick = { navController.navigate("panelB") }) {
+//                Text("Go to Screen B")
+//            }
+//        }
+//    }
+// }
